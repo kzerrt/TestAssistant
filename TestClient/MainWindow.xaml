@@ -1,0 +1,85 @@
+﻿<Window x:Class="TestClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestClient"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="300" Width="400"
+        Background="#f0f0f0">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="#0078d7"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#0078d7"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="30,15,30,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="设备商名称:" Grid.Row="0" Grid.Column="0"/>
+        <TextBox x:Name="deviceOwner" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" />
+
+        <Label Content="设备型号:" Grid.Row="1" Grid.Column="0"/>
+        <TextBox x:Name="deviceCode" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" />
+
+        <Label Content="设备ID:" Grid.Row="2" Grid.Column="0"/>
+        <TextBox x:Name="deviceId" Width="30" Grid.Row="2" Grid.Column="1" Text="0"/>
+
+        <Label Content="端口号:" Grid.Row="2" Grid.Column="2"/>
+        <TextBox x:Name="port" Grid.Row="2" Grid.Column="3" Text="5000"/>
+
+        <Label Content="设备IP地址:" Grid.Row="3" Grid.Column="0"/>
+        <TextBox x:Name="ip" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" />
+
+        <Label Content="测试设备:" Grid.Row="4" Grid.Column="0"/>
+        <ComboBox x:Name="tester" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Margin="5" SelectionChanged="getDeviceInfo"/>
+
+        <Button Content="保存" Grid.Row="5" Grid.Column="3" Click="SaveButton_Click"/>
+        <Button Content="打开" Background="Brown" Grid.Row="5" Grid.Column="0" />
+    </Grid>
+</Window>
