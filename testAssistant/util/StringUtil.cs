@@ -45,12 +45,17 @@ namespace testAssistant.util
             return s;
         }
 
+        /// <summary>
+        /// 根据设备信息设置标签，取设备信息后5位
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
         public static string getLabel(DeviceInfo info) {
             if (info == null) {
                 return null;
             }
 
-            return getEnglish(info.deviceOwner) + subString(info.deviceCode, 5);
+            return info.deviceCode;
         }
         public static string getEnglish(string str) {
             Regex regex = new Regex(english);

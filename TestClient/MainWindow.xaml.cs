@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Windows;
 using testAssistant.config;
 using testAssistant.constant;
@@ -14,8 +15,10 @@ namespace TestClient
     /// </summary>
     public partial class MainWindow
     {
+        private string excuteProgram = null;
         public MainWindow() {
             InitializeComponent();
+            //this.WindowStartupLocation = WindowStartupLocation.CenterScreen;//在中间显示
             // 读取配置信息
             InfoContext.init();
             
@@ -24,12 +27,22 @@ namespace TestClient
         
         
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
-            // 创建对应文件夹
-            dataInit();
-            //createDir();
-            // 修改测试其配置文件
-            modifyConfig();
-            // todo 对测试的机型进行记录
+            bool isRun = true;
+           try
+            {
+                // 创建对应文件夹
+                dataInit();
+                createDir();
+                // 修改测试其配置文件
+                modifyConfig();
+                // todo 对测试的机型进行记录
+                // 启动程序
+                startSimulatorProgram(excuteProgram);
+            } catch(Exception ex)
+            {
+                isRun = false;
+            }
+            exitEAPProgram(isRun);
         }
         private void LoadSavedDevices()
         {
@@ -43,7 +56,28 @@ namespace TestClient
                 
             }
         }
-
+        /// <summary>
+        /// 启动程序
+        /// </summary>
+        private void startSimulatorProgram(string excuteProgram)
+        {
+            if (string.IsNullOrEmpty(excuteProgram))
+            {
+                return;
+            }
+            if (FileUtil.checkFile(excuteProgram))
+            {
+                System.Diagnostics.Process.Start(excuteProgram);
+            }
+        }
+        private void exitEAPProgram(bool isSuccess)
+        {
+            if (isSuccess)
+            {
+                Thread.Sleep(2000);
+                Environment.Exit(1);
+            }
+        }
         #region 业务处理
 
         private void dataInit() {
@@ -77,6 +111,8 @@ namespace TestClient
         private void modifyConfig() {
             // 找到tester配置文件
             var tmp = InfoContext.virtualMachine.tester[0];
+            // 获取启动路径
+            excuteProgram = Path.Combine(tmp[Tester.dir], tmp[Tester.executeProgram]);
             string configPath = Path.Combine(tmp[Tester.dir], tmp[Tester.configName]);
             if (!FileUtil.checkFile(configPath)) {
                 throw new Exception("无法找到模拟器配置文件");
