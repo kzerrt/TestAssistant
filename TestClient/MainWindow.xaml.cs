@@ -67,6 +67,7 @@ namespace TestClient
             }
             if (FileUtil.checkFile(excuteProgram))
             {
+                Thread.Sleep(2000);
                 System.Diagnostics.Process.Start(excuteProgram);
             }
         }
@@ -103,9 +104,9 @@ namespace TestClient
             }
             // 创建设备目录
             FileUtil.createDir(path);
-            InfoContext.logPath = path;
-            /*InfoContext.logPath = Path.Combine(path, "log");
-            FileUtil.createDir( InfoContext.logPath);// 创建日志目录*/
+            /*InfoContext.logPath = Path.Combine(path, "log");*/
+            FileUtil.createDir(InfoContext.currentInfo.LogPath);// 创建日志目录
+
         }
 
         private void modifyConfig() {

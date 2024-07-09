@@ -12,7 +12,6 @@ namespace testAssistant.config
         public static  DeviceInfo currentInfo =new DeviceInfo();
         public static readonly Setting setting = new Setting();
         public static readonly VirtualMachine virtualMachine = new VirtualMachine();
-        public static string logPath { get; set; }
 
         public static void init() {
             var configFile =  ConfigUtil.findConfig();

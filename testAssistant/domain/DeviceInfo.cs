@@ -11,7 +11,6 @@ namespace testAssistant.domain
     /// </summary>
     public class DeviceInfo
     {
-        public string id { get; set; }
         /// <summary>
         /// 设备商
         /// </summary>
@@ -40,9 +39,8 @@ namespace testAssistant.domain
             get
             {
                 if (string.IsNullOrEmpty(logPath)) {
-                    logPath = Path.Combine(InfoContext.setting.baseDir,
-                        StringUtil.getDevice(InfoContext.currentInfo.deviceOwner),
-                        InfoContext.currentInfo.deviceCode);
+                    logPath = Path.Combine(InfoContext.setting.logBaseDir,
+                        StringUtil.converToLegal(InfoContext.currentInfo.deviceCode));
                 }
 
                 return logPath;

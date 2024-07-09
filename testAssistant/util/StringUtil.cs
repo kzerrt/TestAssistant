@@ -73,6 +73,43 @@ namespace testAssistant.util
 
             return str.Substring(0, len);
         }
-        
+        /// <summary>
+        /// 检查ip是否合规
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <returns></returns>
+        public static bool checkIp(string ip)
+        {
+            bool result = ip.Contains(".");
+            ip.Trim('.');
+            if (result)
+            {
+                string[] ips = ip.Split('.');
+                result = ips.Length == 4;
+                if (result)
+                {
+
+                }
+            }
+            return result;
+        }
+
+        public static string converToLegal(string s)
+        {
+            StringBuilder si = new StringBuilder();
+            s.ToUpper();
+            foreach (var c in s)
+            {
+                if (checkLegalChar(c))
+                {
+                    si.Append(c);
+                }
+            }
+            return si.ToString();
+        }
+        private static bool checkLegalChar(char c)
+        {
+            return (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9');
+        }
     }
 }
