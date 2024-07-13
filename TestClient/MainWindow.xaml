@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="400"
+        Title="TestAssitant" Height="300" Width="400"
+        WindowStartupLocation="CenterScreen"
         Background="#f0f0f0">
     <Window.Resources>
         <Style TargetType="Label">
